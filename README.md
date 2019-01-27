@@ -38,7 +38,7 @@ Some lines in the .csv input file are always needed and don't depend on the type
 
 The specially-formatted block in your .csv begins with three cells on a sinle line; one cell reading "friendly fit input" in between two cells including only pound signs, something like:
 
-##### | friendly fit input | #####
+| ##### | friendly fit input | ##### |
 
 in your spreadsheet. Everything in the file before that line will be ignored, and the code will try to configure a fit from the lines after it in the file, some of which are also specially-formatted depending on the type of fit you want to perform
 
@@ -48,14 +48,15 @@ This algorithm fits a set of x and y datapoints (possibly including uncertaintie
 
 ### Input file parameters
 
-There are two sections needed in your input file to run a linear least squares fit. The first section is two lines long and defines the variables standing in for your x and y. It will set the axes on the plot that gets made, and It looks like this in your .csv:
+There are two sections needed in your input file to run a linear least squares fit. The first section is two lines long and defines the variables standing in for your x and y. It will set the axes on the plot that gets made, and It looks like this in your spreadsheet:
 
 | ## x name ## | ## x units ## | ## y name ## | ## y units ## |
+| --- | --- | --- | --- |
 | x variable name | x units | y variable name | y units |
 
 The fields in this line will just be put together to make the legend on the plot; they can be any string.
 
-The other section needed to run a linear least squares fit is your data. It will look like this in your .csv:
+The other section needed to run a linear least squares fit is your data. It will look like this in your spreadsheet:
 
 | ## x values ## | ## x uncertainties ## | ## y values ## | ## y uncertainties ## |
 | --- | --- | --- | --- |
