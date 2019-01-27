@@ -12,7 +12,7 @@ import scipy
 import matplotlib
 ```
 
-If that doesn't crash you should be good.
+If that doesn't crash you should be good. To get this code you can either download or clone the respository.
 
 ## How I installed everything on Mac OSX
 
@@ -30,13 +30,19 @@ pip3 install matplotlib
 
 Running the different fits is configured through an input .csv file that has a section specifically syntaxed to interface with the FriendlyFitter project. This way you can add a specially-formatted block at the end of your regular data-taking spreadsheet, save it as a .csv, and run it through the FriendlyFitter with the resulting output stored in a new file. 
 
+To run the FriendlyFitter from the command line with the example input file, open up a terminal, cd to this project's 'test' directory, and type:
+
+```
+python ../src/run_fitter.py -I speed_of_light_example_input.csv
+```
+
 ## Input file lines common to all fit methods
 
-Some lines in the .csv input file are always needed and don't depend on the type of fit you want to run.
+Some lines in the .csv input file don't depend on the type of fit you want to run.
 
-### The FriendlyFitter indicator line
+### The FriendlyFitter indicator line (mandatory)
 
-The specially-formatted block in your .csv begins with three cells on a sinle line; one cell reading "friendly fit input" in between two cells including only pound signs, something like:
+The specially-formatted block in your .csv begins with three cells on a single line; one cell reading "friendly fit input" in between two cells including only pound signs, something like:
 
 | ##### | friendly fit input | ##### |
 | ----- | ------------------ | ----- |
@@ -45,7 +51,7 @@ in your spreadsheet. Everything in the file before that line will be ignored, an
 
 ## Linear Least Squares
 
-This algorithm fits a set of x and y datapoints (possibly including uncertainties) with a line. The included speed of light data example is a fit of this type. If the datapoints you put in have uncertainties associated with them the fit will weight each datapoint according to its uncertainty.
+This algorithm fits a set of x and y datapoints (possibly including uncertainties) with a line and reports the best-fit line's slope and intercept. The included speed of light data example is a fit of this type. If the datapoints you put in have uncertainties associated with them the fit will weight each datapoint according to its uncertainty.
 
 ### Input file parameters
 
