@@ -6,7 +6,7 @@
 
 #imports
 from optparse import OptionParser
-from os import path
+from os import path, system
 from config import Config
 from fit import Fit
 from datetime import date
@@ -25,33 +25,43 @@ parser.add_option('-O','--output', type='string', action='store', dest='outputfi
 (options, args) = parser.parse_args()
 
 #Main script
-print 'Running FriendlyFitter with input file %s...'%(options.inputfilepath)
-
+print('Running FriendlyFitter with input file '+options.inputfilepath+'...')
 
 #Get the fit configuration from the config file parser
-print '	Building fit configuration...'
+print('	Building fit configuration...')
 if not path.isfile(options.inputfilepath) :
-	print 'ERROR: file %s does not exist'%(options.inputfilepath)
+	print('ERROR: file '+options.inputfilepath+' does not exist!')
 	exit()
 thisfitconfig = Config(options.inputfilepath)
-print '	Done.'
+print('	Done.')
 
 #Initialize the fit with the configuration
-print '	Initializing fit object...'
+print('	Initializing fit object...')
 thisfit = Fit(thisfitconfig)
-print '	Done.'
+print('	Done.')
 
 #perform the fit
-print '	Minimizing...'
+print('	Minimizing...')
 thisfit.minimize()
-print '	Done.'
+print('	Done.')
 
 #write the output file
 outfilename = ( 'FriendlyFitter_output_'+str(date.today())+'.txt' if options.outputfilename=='' 
 				else options.outputfilename )
 if not outfilename.endswith('.txt') : outfilename+='.txt'
-print '	Writing output of fit to file %s...'%(outfilename)
-thisfit.write_to_output_file(outfilename)
-print '	Done.'
+print('	Writing output of fit to file '+outfilename+'...')
+thisfit.writeOutput(outfilename)
+print('	Done.')
 
-print 'All done!'
+#save a plot of the fit
+plotfilename = ( 'FriendlyFitter_plot_'+str(date.today())+'.png' if options.outputfilename=='' 
+				else options.outputfilename )
+if not plotfilename.endswith('.png') : plotfilename+='.png'
+print('	Saving fit plot to file '+plotfilename+'...')
+thisfit.savePlot(plotfilename)
+print('	Done.')
+
+print('All done!')
+
+print('Output file:')
+system('cat '+outfilename)

@@ -23,7 +23,6 @@ brew install python3
 pip3 install numpy
 pip3 install scipy
 pip3 install matplotlib
-
 ```
 
 # Running Fits
@@ -36,13 +35,15 @@ To run the FriendlyFitter from the command line with the example input file, ope
 python ../src/run_fitter.py -I speed_of_light_example_input.csv
 ```
 
+This will produce an output .txt file listing the prefit/postfit parameter values with uncertainties, and a simple plot of the fit in .png form.
+
 ## Input file lines common to all fit methods
 
-Some lines in the .csv input file don't depend on the type of fit you want to run.
+Some lines in the .csv input file don't depend on the type of fit you want to run. Generally if a line starts with at least two hashes ("##") the code will recognize that as a specially-formatted line.
 
 ### The FriendlyFitter indicator line (mandatory)
 
-The specially-formatted block in your .csv begins with three cells on a single line; one cell reading "friendly fit input" in between two cells including only pound signs, something like:
+The specially-formatted block in your .csv begins with three cells on a single line; one cell reading "friendly fit input" in between two cells including only hashes, something like:
 
 | ##### | friendly fit input | ##### |
 | ----- | ------------------ | ----- |
@@ -71,6 +72,5 @@ The other section needed to run a linear least squares fit is your data. It will
 | second x value | second x uncertainty | second y value | second y uncertainty |
 | ... | ... | ... | ... |
 
-The values you put in should be numbers. You can also omit the "uncertainties" columns entirely, fill them with zeroes, or leave them empty if the datapoints you're fitting don't have associated uncertainties. The number of rows below the indicator line is the number of datapoints.
-
+The values you put in should be numbers. You can also fill one or both of the "uncertainties" columns with zeroes or leave them empty if the datapoints you're fitting don't have associated uncertainties. The number of rows below the indicator line is the number of datapoints.
 
